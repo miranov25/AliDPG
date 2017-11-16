@@ -333,12 +333,6 @@ while [ ! -z "$1" ]; do
         fi
         export CONFIG_OCDB
         shift
-    elif [ "$option" = "--ocdbCustom" ]; then
-	CONFIG_OCDBCUSTOM="1"
-	export CONFIG_OCDBCUSTOM
-    elif [ "$option" = "--purifyKineOff" ]; then
-	CONFIG_PURIFYKINEOFF="1"
-	export CONFIG_PURIFYKINEOFF
     elif [ "$option" = "--hlt" ]; then
         CONFIG_HLT="$1"
 	export CONFIG_HLT
@@ -350,23 +344,6 @@ while [ ! -z "$1" ]; do
     elif [ "$option" = "--geant4" ]; then
         CONFIG_GEANT4="on"
 	export CONFIG_GEANT4
-    elif [ "$option" = "--fluka" ]; then
-        CONFIG_FLUKA="on"
-	export CONFIG_FLUKA
-    elif [ "$option" = "--nofastB" ]; then
-        CONFIG_FASTB=""
-    elif [ "$option" = "--novdt" ]; then
-        CONFIG_VDT=""
-#    elif [ "$option" = "--removeTrackRefs" ]; then
-#        CONFIG_REMOVETRACKREFS="on"
-#	export CONFIG_REMOVETRACKREFS
-    elif [ "$option" = "--keepTrackRefsFraction" ]; then
-	CONFIG_KEEPTRACKREFSFRACTION="$1"
-	export CONFIG_KEEPTRACKREFSFRACTION
-        shift
-    elif [ "$option" = "--OCDBTimeStamp" ]; then
-        CONFIG_OCDBTIMESTAMP="$1"
-        export CONFIG_OCDBTIMESTAMP
 #    elif [ "$option" = "--sdd" ]; then
 #        RUNMODE="SDD"
 #	export RUNMODE
