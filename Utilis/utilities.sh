@@ -28,7 +28,7 @@ parseConfig()
 
   local args=("$@")
   local opt=""
-  local originalOptionPrefix="parseConfig__ORIGINAL__"
+  local originalOptionPrefix="parseConfig_ORIGINALOCONFIG_"
 
   #first check if we will need to decode spaces
   local encodedSpaces=""
@@ -41,8 +41,9 @@ parseConfig()
 
   #then look for a configFile (if any)
   for opt in "${args[@]}"; do
-    if [[ ${opt} =~ configFile=.* ]]; then
-      eval "${opt}"
+    if [[ ${opt} =~ -configFile=.* ]]; then
+      #echo `eval "${opt}"`
+      configFile="${opt#*=}"
       [[ ! -f ${configFile} ]] \
         && echo "configFile ${configFile} not found, exiting..." \
         && return 1
@@ -76,8 +77,12 @@ parseConfig()
       value="${opt#*=}"
     fi
     #echo "setting ${var}=${value}"
-    export ${var}="${value}"
+    export CONFIG_${var}="${value}"
     [[ -n ${originalOptionPrefix} ]] && export ${originalOptionPrefix}${var}="${value}"
+    if [[ "$var" == "configFile" ]]; then
+        echo "using config file: ${value}"
+        source "${value}"
+    fi;
   done
   return 0
 }
