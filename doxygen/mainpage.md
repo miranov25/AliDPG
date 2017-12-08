@@ -4,17 +4,21 @@
 
 ### AliDPG build
 
-* Export AliDPG variables,  e.g:
+* Test schema
+  * Export AliDPG variables,  e.g:
     ````
     export AliDPG_SRC=/data/aliceLustre/AliDPG/
     export AliDPG_BUILD=/data/aliceLustre/AliDPG_BUILD
     ````
-* Run cmake
+  * Run cmake
     ````
     cd $AliDPG_BUILD
     cmake $AliDPG_SRC
     ````
-* Run test
+* Building of the AliDPG tests and documentation will be integrated into aliBuild 
+  later   
+
+* Make test
     ````
     make test
     ````
@@ -28,7 +32,7 @@
         100% tests passed, 0 tests failed out of 1
         ````
 * Make doxygen documentation
-   ````
-    make doxygen
-   ````
+        ````
+        make doxygen
+        ````
    * output in the $AliDPG_BUILD/doxygen/html/index.html

@@ -786,7 +786,8 @@ FILE_PATTERNS          = *.h \
                          *.cxx \
                          *.C \
                          *.md \
-                         README*.txt
+                         README*.txt \
+                         *.sh *.awk
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
