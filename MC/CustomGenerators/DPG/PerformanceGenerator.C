@@ -29,7 +29,7 @@ AliGenerator* PerformanceGenerator() {
     nJets=2;
   }
   // default value for injected fraction of jets
-  if (gSystem->Getenv("PerformanceGenerator_nJets")) testHighPtFraction= atof(gSystem->Getenv("PerformanceGenerator_nJets"));
+  if (gSystem->Getenv("PerformanceGenerator_nJets")) nJets= atof(gSystem->Getenv("PerformanceGenerator_nJets"));
   //
   AliGenPerformance *genPerformance= new AliGenPerformance("AliGenPerformance", AliGenPerformance::kStream| AliGenPerformance::kStreamEvent); //
   genPerformance->SetNJets(nJets);
