@@ -92,7 +92,8 @@ void main_rec(const char *filename="raw.root", const char* options="")
   //  rec.SetRunQA(":") ;
   //  rec.SetRunQA("ALL:ALL") ;
   if(gSystem->Getenv("DISABLERECOQA")){
-    rec.SetRunQA("");
+    rec.SetRunQA(":");
+    rec.SetRunGlobalQA(kFALSE);
   }else {
     rec.SetRunQA("Global MUON:ALL");
     rec.SetQARefDefaultStorage("local://$ALICE_ROOT/QAref");
