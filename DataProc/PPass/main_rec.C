@@ -91,9 +91,12 @@ void main_rec(const char *filename="raw.root", const char* options="")
   //  rec.SetRunQA("Global:ESDs") ;
   //  rec.SetRunQA(":") ;
   //  rec.SetRunQA("ALL:ALL") ;
-  rec.SetRunQA("Global MUON:ALL") ;
-  rec.SetQARefDefaultStorage("local://$ALICE_ROOT/QAref") ;
-
+  if(gSystem->Getenv("DISABLERECOQA")){
+    rec.SetRunQA("");
+  }else {
+    rec.SetRunQA("Global MUON:ALL");
+    rec.SetQARefDefaultStorage("local://$ALICE_ROOT/QAref");
+  }
   // AD stuff (see ALIROOT-6663)
 
   // rec.SetOption("AD", "+SaturationCorrection"); // --> not needed anymore, see https://alice.its.cern.ch/jira/browse/ALIROOT-6778
