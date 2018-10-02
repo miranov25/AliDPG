@@ -840,7 +840,11 @@ if [[ $CONFIG_MODE == *"sim"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
     runcommand "SIMULATION" $SIMC sim.log 5
     mv -f syswatch.log simwatch.log
 
-    runBenchmark
+    if [[ -z "${DISABLEStresstest}" ]]; then
+        runBenchmark
+    else
+        echo "runBenchmark disable by variable DISABLEStresstest"
+    fi;
 
 fi
 
@@ -875,13 +879,16 @@ if [[ $CONFIG_MODE == *"rec"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
 #
     
     # delete files not needed anymore
-    if [[ $CONFIG_SIMULATION == "EmbedBkg" ]]; then
-	rm -f *.RecPoints.root *.Digits.root
-	ls *.Hits.root | grep -v T0.Hits.root | xargs rm
+    if [[ -z "${RecoKEEPRootFiles}" ]]; then
+        echo "Files kept for later usage (RecoKEEPRootFiles enabled)"
     else
-	rm -f *.RecPoints.root *.Hits.root *.Digits.root *.SDigits.root
-    fi
-
+        if [[ $CONFIG_SIMULATION == "EmbedBkg" ]]; then
+	        rm -f *.RecPoints.root *.Digits.root
+	        ls *.Hits.root | grep -v T0.Hits.root | xargs rm
+        else
+	        rm -f *.RecPoints.root *.Hits.root *.Digits.root *.SDigits.root
+        fi
+    fi;
 fi
 
 ### Embedded signal filtering (only upon request and in embedded mode)
