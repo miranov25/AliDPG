@@ -91,7 +91,7 @@ void main_rec(const char *filename="raw.root", const char* options="")
   //  rec.SetRunQA("Global:ESDs") ;
   //  rec.SetRunQA(":") ;
   //  rec.SetRunQA("ALL:ALL") ;
-  if(gSystem->Getenv("DISABLERECOQA")){
+  if(gSystem->Getenv("CONFIG_DISABLERECOQA")){
     rec.SetRunQA(":");
     rec.SetRunGlobalQA(kFALSE);
     ::Info("main_rec","Disabling QA");

@@ -817,10 +817,10 @@ if [[ $CONFIG_MODE == *"sim"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
     runcommand "SIMULATION" $SIMC sim.log 5
     mv -f syswatch.log simwatch.log
 
-    if [[ -z "${DISABLEStresstest}" ]]; then
+    if [[ -z "${CONFIG_DISABLEStresstest}" ]]; then
         runBenchmark
     else
-        echo "runBenchmark disable by variable DISABLEStresstest"
+        echo "runBenchmark disable by variable CONFIG_DISABLEStresstest"
     fi;
 
 fi
@@ -856,8 +856,8 @@ if [[ $CONFIG_MODE == *"rec"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
 #
     
     # delete files not needed anymore
-    if [[ -z "${RecoKEEPRootFiles}" ]]; then
-        echo "Files kept for later usage (RecoKEEPRootFiles enabled)"
+    if [[ -z "${CONFIG_RecoKEEPRootFiles}" ]]; then
+        echo "Files kept for later usage (CONFIG_RecoKEEPRootFiles enabled)"
     else
         if [[ $CONFIG_SIMULATION == "EmbedBkg" ]]; then
 	        rm -f *.RecPoints.root *.Digits.root
@@ -956,10 +956,13 @@ if [[ $CONFIG_MODE == *"aod"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
 
 fi
 
-if [ $CONFIG_REMOVETRACKREFS == "on" ] && [ -f TrackRefs.root ] ; then
-    echo "Removing TrackRefs.root"
-    rm -f TrackRefs.root
+if [[ -z "${CONFIG_MCKEEPRootFiles}" ]]; then
+    if [ $CONFIG_REMOVETRACKREFS == "on" ] && [ -f TrackRefs.root ] ; then
+        echo "Removing TrackRefs.root"
+        rm -f TrackRefs.root
+    else
+        echo "Keep  TrackRefs.root bacause of keeping all root files in test mode"
+    fi
 fi
-
 
 exit 0
