@@ -42,7 +42,7 @@ void rec()
  
   /* configuration */
   ReconstructionConfig(rec, reconstructionConfig);
- if(gSystem->Getenv("DISABLERECOQA")){
+ if(gSystem->Getenv("CONFIG_DISABLERECOQA")){
     rec.SetRunQA(":");
     rec.SetRunGlobalQA(kFALSE);
     ::Info("main_rec","Disabling QA");
