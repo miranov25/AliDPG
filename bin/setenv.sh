@@ -21,3 +21,10 @@ export CONFIG_RecoKEEPRootFiles=1    # needed in case we want to repeat QA, filt
 export AliAnalysisTaskFilteredTree_SetLowPtTrackDownscalingF=10
 export AliAnalysisTaskFilteredTree_SetLowPtV0DownscalingF=10
 
+# 4.) STREAMER configuration in simulation and reconstruction
+# Enable this line to check iontail and crosstalk correction
+export CONFIG_STREAMER_TPCReconstruction="AliTPCtracker::kStreamCrosstalkMatrix | AliTPCtracker::kStreamXtalk  | AliTPCtracker::kStreamIonTail"
+# Enable this line to check cluster residuals and error parametrization
+# export CONFIG_STREAMER_TPCReconstruction="AliTPCtracker::kStreamTransform |  AliTPCtracker::kStreamErrParam"
+# Enable this line to check stream partial TPC signals
+export CONFIG_STREAMER_TPCSimulation="AliTPCDigitizer::kStreamCrosstalk|AliTPCDigitizer::kStreamSignal|AliTPCDigitizer::kStreamSignalAll"
