@@ -221,6 +221,10 @@ void SimulationDefault(AliSimulation &sim)
     //    cdbm->SetSnapshotMode("OCDBsim.root");
   }
 
+  if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) gROOT->ProcessLine("MCDeltaOCDB()");
+    else ::Error("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
+  }
   //
   //
   if (year < 2015) sim.SetMakeSDigits("TRD TOF PHOS HMPID EMCAL MUON ZDC PMD T0 VZERO FMD");
@@ -362,4 +366,9 @@ void SetCDBRun3(int run)
     }
   }
   AliCDBManager::Instance()->SetRun(run);
+
+  if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) gROOT->ProcessLine("MCDeltaOCDB()");
+    else ::Error("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
+  }
 }

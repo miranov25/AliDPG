@@ -7,14 +7,14 @@ export CONFIG_DISABLEStresstest=1;
 #
 # 1.) simulation
 export CONFIG_MCKEEPRootFiles=1    # needed in case we want to repeat only reconstruction and following actions and for option debugging
-
+export CONFIG_MCDeltaOCDB="MCDeltaOCDB.C"   # delta MC OCDB configuration - applied as in CSS as last on top of "standard" OCDB
 # 2. Reconstruction
 # disable  reconstruction QA (by default  QA is enabled)
 # export RECODETECTORLIST
 export CONFIG_DISABLERECOQA=1
 #export DETECTORList=
 export CONFIG_RecoKEEPRootFiles=1    # needed in case we want to repeat QA, filterring .. and for option debugging
-
+export CONFIG_RecoDeltaOCDB="RecoDeltaOCDB.C"   # delta reconstuction  OCDB configuration - applied as in CSS as last on top of "standard" OCDB
 # 3. Filtering
 #      filtering task -  usage not default downsampling parameters e.g for the custom production (performance generator, jet production ..)
 #      default downsampling optimized for Minimum bias data

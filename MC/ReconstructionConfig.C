@@ -256,7 +256,10 @@ void ReconstructionDefault(AliReconstruction &rec)
     cdbm->SetDefaultStorage("local://");
     //    cdbm->SetSnapshotMode("OCDBrec.root");
   }
-
+  if (gSystem->Getenv("CONFIG_RecoDeltaOCDB")) {
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_RecoDeltaOCDB"))>=0) gROOT->ProcessLine("RecoDeltaOCDB()");
+    else ::Error("CONFIG_RecoDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_RecoDeltaOCDB"));
+  }
     //
     rec.SetCleanESD(kFALSE);
     rec.SetStopOnError(kFALSE);
@@ -469,4 +472,9 @@ void SetCDBRun3(int run)
   cdbm->SetSpecificStorage("GRP/GRP/Data", "local://./");
 
   AliCDBManager::Instance()->SetRun(run);
+  if (gSystem->Getenv("CONFIG_RecoDeltaOCDB")) {
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_RecoDeltaOCDB"))>=0) gROOT->ProcessLine("RecoDeltaOCDB()");
+    else ::Error("CONFIG_RecoDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_RecoDeltaOCDB"));
+  }
+
 }
