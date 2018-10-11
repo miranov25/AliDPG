@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-#   $ALIDPG_SRC/Utilis/test/utilities.test.sh;
+#   $ALIDPG_ROOT/Utilis/test/utilities.test.sh;
 
 testParseConfig(){
     # test parse config
     env > envOld.txt
-    alilog_info "testParseConfig -configFile $AliDPG_SRC/Utilis/test/genPerformance.config.sh --generator Custom -simulation SimulationDefaultIonTail --FilteringHighPt 10  --keepFiles 1 --configFile genPerformance.config.sh"
-    parseConfig --configFile $AliDPG_SRC/Utilis/test/genPerformance.config.sh --generator Custom -simulation SimulationDefaultIonTail --FilteringHighPt 10  --keepFiles 1
+    alilog_info "testParseConfig -configFile $AliDPG_ROOT/Utilis/test/genPerformance.config.sh --generator Custom -simulation SimulationDefaultIonTail --FilteringHighPt 10  --keepFiles 1 --configFile genPerformance.config.sh"
+    parseConfig --configFile $AliDPG_SRC/Utilis/test/genPerformance.config.sh --CONFIG_generator Custom -CONFIG_simulation SimulationDefaultIonTail --CONFIG_FilteringHighPt 10 --CONFIG_FilteringHighV0 100 --keepFiles 1
     [[ "${CONFIG_generator}"   != "Custom"   ]] && alilog_error    "Option generator!=custom"
     [[ "${CONFIG_generator}"   == "Custom"   ]] && alilog_success  "Option generator==custom"
     [[ "${CONFIG_simulation}"   != "SimulationDefaultIonTail"   ]] && alilog_error    "Option simulation!=SimulationDefaultIonTail"
@@ -19,6 +19,6 @@ testParseConfig(){
     diff -y --suppress-common-lines -W 200 envOld.txt envNew.txt | tee envDiff.txt
 }
 
-source $AliDPG_SRC/Utilis/utilities.sh;
 source $ALICE_ROOT/libexec/alilog4bash.sh
+source $ALICE_ROOT/libexec/utilities.sh
 testParseConfig;
