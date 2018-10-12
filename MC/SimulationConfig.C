@@ -223,7 +223,7 @@ void SimulationDefault(AliSimulation &sim)
 
   if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
     if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) gROOT->ProcessLine("MCDeltaOCDB()");
-    else ::Error("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
+    else ::Fatal("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
   }
   //
   //
@@ -369,6 +369,6 @@ void SetCDBRun3(int run)
 
   if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
     if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) gROOT->ProcessLine("MCDeltaOCDB()");
-    else ::Error("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
+    else ::Fatal("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
   }
 }
