@@ -14,7 +14,7 @@ export CONFIG_MCDeltaOCDB="$NOTES/JIRA/ATO-452/MCDeltaOCDB.C"   # delta MC OCDB 
 export CONFIG_DISABLERECOQA=1
 #export DETECTORList=
 export CONFIG_RecoKEEPRootFiles=1    # needed in case we want to repeat QA, filterring .. and for option debugging
-export CONFIG_RecoDeltaOCDB="RecoDeltaOCDB.C"   # delta reconstuction  OCDB configuration - applied as in CSS as last on top of "standard" OCDB
+export CONFIG_RecoDeltaOCDB="$NOTES/JIRA/ATO-452/RecoDeltaOCDB.C"   # delta reconstuction  OCDB configuration - applied as in CSS as last on top of "standard" OCDB
 # 3. Filtering
 #      filtering task -  usage not default downsampling parameters e.g for the custom production (performance generator, jet production ..)
 #      default downsampling optimized for Minimum bias data
