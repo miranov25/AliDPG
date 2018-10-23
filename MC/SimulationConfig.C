@@ -222,7 +222,11 @@ void SimulationDefault(AliSimulation &sim)
   }
 
   if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
-    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) gROOT->ProcessLine("MCDeltaOCDB()");
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) {
+      AliCDBManager::Instance()->ClearCache();
+      gROOT->ProcessLine("MCDeltaOCDB()");
+      if (AliCDBManager::Instance()->GetRun()>0) AliCDBManager::Instance()->SetRun(AliCDBManager::Instance()->GetRun());
+    }
     else ::Fatal("CONFIG_MCDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
   }
   //

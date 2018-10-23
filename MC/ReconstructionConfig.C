@@ -257,7 +257,11 @@ void ReconstructionDefault(AliReconstruction &rec)
     //    cdbm->SetSnapshotMode("OCDBrec.root");
   }
   if (gSystem->Getenv("CONFIG_RecoDeltaOCDB")) {
-    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_RecoDeltaOCDB"))>=0) gROOT->ProcessLine("RecoDeltaOCDB()");
+    if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_RecoDeltaOCDB"))>=0) {
+      AliCDBManager::Instance()->ClearCache();
+      gROOT->ProcessLine("RecoDeltaOCDB()");
+      if (AliCDBManager::Instance()->GetRun()>0) AliCDBManager::Instance()->SetRun(AliCDBManager::Instance()->GetRun());
+    }
     else ::Error("CONFIG_RecoDeltaOCDB","Invalid macro %s",gSystem->Getenv("CONFIG_RecoDeltaOCDB"));
   }
     //
