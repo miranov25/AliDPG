@@ -259,6 +259,8 @@ void ReconstructionDefault(AliReconstruction &rec)
   if (gSystem->Getenv("CONFIG_RecoDeltaOCDB")) {
     if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_RecoDeltaOCDB"))>=0) {
       AliCDBManager::Instance()->ClearCache();
+      printf("Reset CDB cache\n");
+      printf("Calling %s",gSystem->Getenv("CONFIG_RecoDeltaOCDB"));
       gROOT->ProcessLine("RecoDeltaOCDB()");
       if (AliCDBManager::Instance()->GetRun()>0) AliCDBManager::Instance()->SetRun(AliCDBManager::Instance()->GetRun());
     }

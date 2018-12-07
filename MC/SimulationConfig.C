@@ -64,7 +64,17 @@ void SimulationConfig(AliSimulation &sim, ESimulation_t tag)
 {
   
   printf(">>>>> SimulationConfig: %s \n", SimulationName[tag]);
-  
+  /// Streamer
+   if ( gSystem->Getenv("CONFIG_STREAMER_TPCSimulation")) {
+    Int_t streamLevel=gROOT->ProcessLine(gSystem->Getenv("CONFIG_STREAMER_TPCSimulation"));
+    ::Info("SetStreamLevel",gSystem->Getenv("CONFIG_STREAMER_TPCSimulation"));
+    ::Info("SetStreamLevel",Form("%d",streamLevel));
+    AliTPCReconstructor::SetStreamLevel(streamLevel);
+  }else{
+    ::Info("SetStreamLevel","No stream set");
+  }
+
+
   /** fast magnetic field **/
   if (gSystem->Getenv("CONFIG_FASTB")) {  
     if (!AliMagF::Class()->GetMethodAny("SetFastFieldDefault")) {
@@ -195,7 +205,16 @@ void SimulationConfig(AliSimulation &sim, ESimulation_t tag)
     return;
 
   }
+  /// Set stream level if specified
 
+  if ( gSystem->Getenv("CONFIG_STREAMER_TPCSimulation")) {
+    Int_t streamLevel=gROOT->ProcessLine(gSystem->Getenv("CONFIG_STREAMER_TPCSimulation"));
+    ::Info("SetStreamLevel",gSystem->Getenv("CONFIG_STREAMER_TPCSimulation"));
+    ::Info("SetStreamLevel",Form("%d",streamLevel));
+    AliTPCReconstructor::SetStreamLevel(streamLevel);
+  }else{
+    ::Info("SetStreamLevel","No stream set");
+  }
 }
 
 void SimulationDefault(AliSimulation &sim)
@@ -224,6 +243,8 @@ void SimulationDefault(AliSimulation &sim)
   if (gSystem->Getenv("CONFIG_MCDeltaOCDB")) {
     if (gROOT->LoadMacro(gSystem->Getenv("CONFIG_MCDeltaOCDB"))>=0) {
       AliCDBManager::Instance()->ClearCache();
+      printf("Reset CDB cache\n");
+      printf("Calling %s",gSystem->Getenv("CONFIG_MCDeltaOCDB"));
       gROOT->ProcessLine("MCDeltaOCDB()");
       if (AliCDBManager::Instance()->GetRun()>0) AliCDBManager::Instance()->SetRun(AliCDBManager::Instance()->GetRun());
     }
