@@ -856,7 +856,7 @@ if [[ $CONFIG_MODE == *"rec"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
 #
     
     # delete files not needed anymore
-    if [[ -z "${CONFIG_RecoKEEPRootFiles}" ]]; then
+    if [[ ! -z "${CONFIG_RecoKEEPRootFiles}" ]]; then
         echo "Files kept for later usage (CONFIG_RecoKEEPRootFiles enabled)"
     else
         if [[ $CONFIG_SIMULATION == "EmbedBkg" ]]; then
@@ -956,7 +956,7 @@ if [[ $CONFIG_MODE == *"aod"* ]] || [[ $CONFIG_MODE == *"full"* ]]; then
 
 fi
 
-if [[ -z "${CONFIG_MCKEEPRootFiles}" ]]; then
+if [[ ! -z "${CONFIG_MCKEEPRootFiles}" ]]; then
     if [ $CONFIG_REMOVETRACKREFS == "on" ] && [ -f TrackRefs.root ] ; then
         echo "Removing TrackRefs.root"
         rm -f TrackRefs.root
